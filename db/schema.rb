@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009110357) do
+ActiveRecord::Schema.define(version: 20151009111328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,4 +23,17 @@ ActiveRecord::Schema.define(version: 20151009110357) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "reverse_records", force: :cascade do |t|
+    t.integer  "record_id"
+    t.string   "name",       default: "",   null: false
+    t.string   "rdata",      default: "",   null: false
+    t.string   "rdtype",     default: "",   null: false
+    t.integer  "ttl",        default: 3600, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "reverse_records", ["record_id"], name: "index_reverse_records_on_record_id", using: :btree
+
+  add_foreign_key "reverse_records", "records"
 end
