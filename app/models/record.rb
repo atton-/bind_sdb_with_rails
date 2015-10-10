@@ -6,9 +6,6 @@ class Record < ActiveRecord::Base
   has_one :forward_record, dependent: :destroy
   has_one :reverse_record, dependent: :destroy
 
-  IPv4Prefix   = '10.100.200.'
-  DomainSuffix = 'hoge.com'
-
   def ipv4
     IPAddr.new(IPv4Prefix + ip.to_s)
   end
